@@ -1,0 +1,243 @@
+---
+title: "wOBA, Runs per Game, and Wins"
+author: "Colin Sanders"
+date: 2021-09-01T21:13:14-05:00
+output:
+  html_document: default
+  pdf_document: default
+---
+
+<script src="2021 SEC EAST PLUS REG_files/header-attrs/header-attrs.js"></script>
+
+
+<p>In this analysis, we will look at the the performances of SEC baseball teams over the past 3 seasons. We are going to test the hypothesis that a team’s wOBA is correlated with the number of wins they get during the season. We are also going to test the hypothesis that wOBA is correlated with runs scored per game in order to see how accurate of a measure of offensive production it is.</p>
+<p>wOBA, or weight On Base Average, is a stat created by Tom Tango in his book “<em>The Book: Playing the Percentages in Baseball</em>”. Its aims to be a one-stat-fits-all model to measure a player’s offensive production. .400 wOBA is excellent, .320 wOBA is average, and anything below .320 is poor.</p>
+<pre class="r"><code>#This is how the data was gathered for each team, in the spirit of brevity,
+#only one example will be shown.
+data&lt;-ncaa_scrape(257, 2021, type = &quot;batting&quot;)
+dat.starters=subset(data, AB &gt; 50)
+#Calculates and adds OPS to the dataframe
+dat.starters$OPS&lt;-c(dat.starters$OBPct + dat.starters$SlgPct)
+#Replaces &#39;NA&#39; with a zero
+dat.starters[is.na(dat.starters)] = 0
+#Calculates and adds singles as a stat so wOBA can be calculated
+dat.starters$single=dat.starters$H-(dat.starters$`2B`+ dat.starters$`3B` + dat.starters$HR)
+#Calculates and adds wOBA
+dat.starters$wOBA=c(.69*dat.starters$BB + .722*dat.starters$HBP + 0.888*dat.starters$single + 1.271*dat.starters$`2B` + 1.616*dat.starters$`3B` + 2.101*dat.starters$HR)/(dat.starters$AB + dat.starters$BB + dat.starters$SF + dat.starters$HBP)
+#Calculates and adds K% and BB% to help in lineup construction. 
+dat.starters$kRate&lt;-(dat.starters$K/dat.starters$AB)*100
+dat.starters$BBrate&lt;-(dat.starters$BB/dat.starters$AB)*100
+wOBA.UGA&lt;-mean(dat.starters$wOBA)</code></pre>
+<pre class="r"><code>Teamse.21&lt;-c(&quot;Tennessee&quot;, &quot;Vanderbilt&quot;, &quot;Florida&quot;, &quot;South Carolina&quot;, &quot;Georgia&quot;, &quot;Kentucky&quot;, &quot;Missouri&quot;)
+Winse.21&lt;-c(50, 49, 38, 34, 31, 29, 15)
+TwOBAe.21&lt;-c(.375, .371, .351, .340, .336, .350, .312)
+RPGe.21&lt;-c(7.0, 6.8, 6.3, 5.6, 5.4, 5.8, 5.3)
+data.framee21=data.frame(Teamse.21, Winse.21, TwOBAe.21, RPGe.21)</code></pre>
+<pre class="r"><code>cor.test(TwOBAe.21, Winse.21, method = &quot;pearson&quot;)</code></pre>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  TwOBAe.21 and Winse.21
+## t = 7.5125, df = 5, p-value = 0.0006611
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.7381758 0.9940400
+## sample estimates:
+##       cor 
+## 0.9584448</code></pre>
+<pre class="r"><code>(0.958)^2</code></pre>
+<pre><code>## [1] 0.917764</code></pre>
+<p>There was a significant positive correlation between a team’s wOBA and Wins, <em>r</em>(5) = .96, <em>p</em> = .00066.</p>
+<pre class="r"><code>cor.test(TwOBAe.21, RPGe.21, method = &quot;pearson&quot;)</code></pre>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  TwOBAe.21 and RPGe.21
+## t = 5.6224, df = 5, p-value = 0.002464
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.5866829 0.9897155
+## sample estimates:
+##       cor 
+## 0.9292101</code></pre>
+<pre class="r"><code>(0.929)^2</code></pre>
+<pre><code>## [1] 0.863041</code></pre>
+<p>There was a significant positive correlation between a team’s wOBA and the number of runs scored per game, <em>r</em>(5) = .93, <em>p</em> = .0025.</p>
+<pre class="r"><code>wins.woba.lm &lt;- lm(Winse.21 ~ TwOBAe.21, data = data.framee21)
+summary(wins.woba.lm)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Winse.21 ~ TwOBAe.21, data = data.framee21)
+## 
+## Residuals:
+##       1       2       3       4       5       6       7 
+##  0.1832  1.3457  1.1581  3.1049  2.2673 -7.3013 -0.7578 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  -152.92      25.07  -6.099 0.001716 ** 
+## TwOBAe.21     540.62      71.96   7.512 0.000661 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 3.791 on 5 degrees of freedom
+## Multiple R-squared:  0.9186, Adjusted R-squared:  0.9023 
+## F-statistic: 56.44 on 1 and 5 DF,  p-value: 0.0006611</code></pre>
+<pre class="r"><code>library(ggplot2)
+plot1&lt;-ggplot(data.framee21, aes(x=TwOBAe.21, y=Winse.21)) + geom_point()+geom_smooth(method=&quot;lm&quot;,  se=FALSE)
+plot1</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="/post/2021/2021%20SEC%20EAST%20PLUS%20REG_files/figure-html/Plotting%20regression-1.png" width="672" />
+Regression equation is y=540.62x - 152.92</p>
+<p>Using a sample of SEC East teams from 2021, we found evidence that there may be a correlation, so it is time to increase the sample size.</p>
+<div id="now-we-are-going-to-look-at-data-from-the-last-3-full-years-excluding-2020-because-it-was-a-shortened-season." class="section level3">
+<h3>Now we are going to look at data from the last 3 full years (excluding 2020 because it was a shortened season).</h3>
+<pre class="r"><code>wins.total&lt;-c(50, 49, 38, 34, 31, 29, 15, 59, 34, 46, 26, 34, 40, 28, 35, 49, 39, 34, 34, 29, 37)
+twoba.total&lt;-c(.375, .371, .351, .340, .336, .350, .312, .400, .368, .357, .342, .337, .335, .328, .357, .368, .344, .387, .332, .331, .350)
+data.frame.total&lt;-data.frame(wins.total, twoba.total)
+cor.test(twoba.total, wins.total, method = &quot;pearson&quot;)</code></pre>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  twoba.total and wins.total
+## t = 5.2057, df = 19, p-value = 5.032e-05
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.5007666 0.9003879
+## sample estimates:
+##       cor 
+## 0.7667103</code></pre>
+<pre class="r"><code>.767^2</code></pre>
+<pre><code>## [1] 0.588289</code></pre>
+<p>There was a significant positive correlation between a team’s wOBA and Wins, <em>r</em>(19) = .77, <em>p</em> = .00005.</p>
+<pre class="r"><code>wins.woba.lm.total &lt;- lm(wins.total ~ twoba.total, data = data.frame.total)
+summary(wins.woba.lm.total)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = wins.total ~ twoba.total, data = data.frame.total)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -15.412  -3.791   1.228   4.836   8.998 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   -87.60      23.91  -3.663  0.00165 ** 
+## twoba.total   354.04      68.01   5.206 5.03e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 6.475 on 19 degrees of freedom
+## Multiple R-squared:  0.5878, Adjusted R-squared:  0.5662 
+## F-statistic:  27.1 on 1 and 19 DF,  p-value: 5.032e-05</code></pre>
+<pre class="r"><code>ggplot(data.frame.total, aes(x=twoba.total, y=wins.total)) + 
+  geom_point() + 
+  geom_smooth(method=lm, se=FALSE)+
+  theme_classic()+
+  labs(title=&quot;Relationship between Team wOBA and Total Wins&quot;,
+       x=&quot;wOBA&quot;, y = &quot;Wins&quot;)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="/post/2021/2021%20SEC%20EAST%20PLUS%20REG_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Now lets look at the relationship betwen twoba and RPG.</p>
+<pre class="r"><code>twoba.total&lt;-c(.375, .371, .351, .340, .336, .350, .312, .400, .368, .357, .342, .337, .335, .328, .357, .368, .344, .387, .332, .331, .350)
+RPG.total&lt;-c(7.0, 6.8, 6.3, 5.6, 5.4, 5.8, 5.3, 8.1, 6.8, 6.4, 5.6, 6.4, 6.2, 5.5, 6.2, 6.6, 6.4, 7.1, 6.0, 5.3, 6.2)
+data.frame.total&lt;-data.frame(wins.total, twoba.total, RPG.total)
+cor.test(twoba.total, RPG.total, method = &#39;pearson&#39;)</code></pre>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  twoba.total and RPG.total
+## t = 9.2016, df = 19, p-value = 1.976e-08
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.7740005 0.9606421
+## sample estimates:
+##       cor 
+## 0.9037283</code></pre>
+<pre class="r"><code>.904^2</code></pre>
+<pre><code>## [1] 0.817216</code></pre>
+<p>There was a significant positive correlation between a team’s wOBA and the number of runs scored per game, <em>r</em>(19) = .90, <em>p</em> = .00000002.</p>
+<p>With the larger sample we still saw a strong, positive relationship.</p>
+</div>
+<div id="now-we-are-going-to-add-in-the-sec-west-to-further-test-the-relationship." class="section level3">
+<h3>Now we are going to add in the SEC West to further test the relationship.</h3>
+<pre class="r"><code>Teams.21&lt;-c(&quot;Arkansas&quot;, &quot;Mississippi State&quot;, &quot;Ole Miss&quot;, &quot;LSU&quot;, &quot;Alabama&quot;, &quot;Auburn&quot;, &quot;Texas A&amp;M&quot;)
+Wins.21&lt;-c(50, 47, 45, 38, 38, 25, 29)
+TwOBA.21&lt;-c(.385, .349, .365, .353, .336, .372, .348)
+RPG.21&lt;-c(7.7, 7.0, 7.1, 6.6, 5.8, 7.0, 6.1)
+data.frame21=data.frame(Teams.21, Wins.21, TwOBA.21, RPG.21)</code></pre>
+<pre class="r"><code>cor.test(TwOBA.21, Wins.21, method = &quot;pearson&quot;)</code></pre>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  TwOBA.21 and Wins.21
+## t = 0.48851, df = 5, p-value = 0.6459
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.6429665  0.8326604
+## sample estimates:
+##       cor 
+## 0.2134349</code></pre>
+<p>There was not a significant positive correlation between a team’s wOBA and wins, <em>r</em>(5) = .21, <em>p</em> = .65.</p>
+<pre class="r"><code>cor.test(TwOBA.21, RPG.21, method = &quot;pearson&quot;)</code></pre>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  TwOBA.21 and RPG.21
+## t = 4.411, df = 5, p-value = 0.00695
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.4230154 0.9840375
+## sample estimates:
+##       cor 
+## 0.8919411</code></pre>
+<p>There was a significant positive correlation between a team’s wOBA and Wins, <em>r</em>(5) = .89, <em>p</em> = .0070.</p>
+</div>
+<div id="now-lets-expand-the-parameters-to-the-last-3-years-of-sec-play." class="section level3">
+<h3>Now lets expand the parameters to the last 3 years of SEC play.</h3>
+<pre class="r"><code>wins.total&lt;-c(50, 49, 38, 34, 31, 29, 15, 59, 34, 46, 26, 34, 40, 28, 35, 49, 39, 34, 34, 29, 37, 50, 47, 45, 38, 38, 25, 29, 46, 52, 41, 40, 30, 38, 39, 48, 39, 48, 39, 27, 43, 40)
+twoba.total&lt;-c(.375, .371, .351, .340, .336, .350, .312, .400, .368, .357, .342, .337, .335, .328, .357, .368, .344, .387, .332, .331, .350, .385, .349, .365, .353, .336, .372, .348, .376, .381, .365, .331, .334, .335, .302, wOBA.ar.18, wOBA.ms.18, wOBA.om.18, wOBA.lsu.18, wOBA.al.18, wOBA.au.18, wOBA.tam.18)
+data.frame.total&lt;-data.frame(wins.total, twoba.total)
+cor.test(twoba.total, wins.total, method = &quot;pearson&quot;)</code></pre>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  twoba.total and wins.total
+## t = 4.9186, df = 40, p-value = 1.534e-05
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.3810683 0.7735068
+## sample estimates:
+##       cor 
+## 0.6138988</code></pre>
+<pre class="r"><code>wins.woba.lm.total &lt;- lm(wins.total ~ twoba.total, data = data.frame.total)
+summary(wins.woba.lm.total)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = wins.total ~ twoba.total, data = data.frame.total)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -18.840  -4.231   1.739   5.616  13.177 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   -51.91      18.39  -2.823  0.00738 ** 
+## twoba.total   257.39      52.33   4.919 1.53e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 7.036 on 40 degrees of freedom
+## Multiple R-squared:  0.3769, Adjusted R-squared:  0.3613 
+## F-statistic: 24.19 on 1 and 40 DF,  p-value: 1.534e-05</code></pre>
+<pre class="r"><code>library(ggplot2)
+ggplot(data.frame.total, aes(x=twoba.total, y=wins.total)) + 
+  geom_point() + 
+  geom_smooth(method=lm, se=FALSE)+
+  theme_classic()+
+  labs(title=&quot;Relationship between Team wOBA and Total Wins&quot;,
+       x=&quot;wOBA&quot;, y = &quot;Wins&quot;)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="/post/2021/2021%20SEC%20EAST%20PLUS%20REG_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+There was a significant positive correlation between a team’s wOBA and Wins, <em>r</em>(40) = .61, <em>p</em> = .000015. The regression equation is y=257.39x-51.91.</p>
+</div>
