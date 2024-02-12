@@ -1,15 +1,15 @@
 title: My blog
-description: My very nice blog
-author: "Jorge Sanz"
+description: A blog dedicated to MLB and NCAA baseball analysis
+author: "Colin Sanders"
 
 theme: minima
 
-base_url: /gh-pages-minima-starter
-repository: jsanz/gh-pages-minima-starter
+base_url: 
+repository: ColinSanders1/ColinSanders1
 
 # Minima social links
-github_username: jsanz
-linkedin_username: jsanz
+github_username: ColinSanders1
+linkedin_username: Colin Sanders
 rss: rss
 
 # Minima: show excerpts in the frontpage
