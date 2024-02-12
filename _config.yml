@@ -9,8 +9,7 @@ repository: ColinSanders1/ColinSanders1.github.io
 
 # Minima social links
 github_username: ColinSanders1
-linkedin_username: Colin Sanders
-rss: rss
+linkedin_username: https://www.linkedin.com/in/colin-sanders-14302521a/
 
 # Minima: show excerpts in the frontpage
 show_excerpts: true
