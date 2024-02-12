@@ -4,6 +4,4 @@ gem 'github-pages', group: :jekyll_plugins
 
 gem "webrick", "~> 1.8"
 
-gem 'minima'
-
-gem 'jekyll'
+gem 'jekyll', '~> 4.3'
