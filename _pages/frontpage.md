@@ -7,7 +7,7 @@ list_title: My blog posts
 
 This is a template and some instructions for running Github Pages with the [`minima` theme][minima]. This repo has what I consider the minimum pieces for a personal blog using [Jekyll][jk] and [Github Pages][gh-site].
 
-Check out the excellent [`minima` theme][minima] documentation for further details and customization and the [official docs][gh] for more details on how Github Pages work.
+If you're looking for something interactive, check out my Shiny app [here](https://colin-sanders.shinyapps.io/shiny_app/).
 
 Do you have questions? feel free to [open an issue][issue] or find out how toreach me from my [contact page][contact].
 
