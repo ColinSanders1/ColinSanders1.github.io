@@ -1,20 +1,10 @@
-# gh-pages-minima-starter
+# CS Blog Primer
 
-This is a template and some instructions for running Github Pages with the [`minima` theme][minima]. This repo has what I consider the minimum pieces for a personal blog using [Jekyll][jk] and [Github Pages][gh-site]:
+This is my blog where I'll be sharing some of the projects I work on throughout the year. You can also find my Shiny App linked on the website. 
 
-* Frontpage that includes your last blog posts: `_pages/frontpage.md`
-* Archive for all your posts: `_pages/archive.md`
-* About page: `_pages/about.md`
-* Minimum 404 page: `_pages/404.md`
-* Minimum metadata in the `_config.yml`
-* Example CSS change inside `assets/main.scss`
-* Custom footer template `_includes/footer.html`
+It is still very much a work in progress, so bear with me if there are some hiccups along the way. 
 
-Check out the excellent [`minima` theme][minima] documentation for further details and customization and the [official docs][gh] for more details on how Github Pages work.
-
-For more details on how to set it up locally, create content, use Github interface, etc. feel free to visit this [website post][dev] or the source code here.
-
-Do you have questions? feel free to [open an issue](https://github.com/jsanz/gh-pages-minima-starter/issues/new/choose) or [contact me](https://jorgesanz.net/contact).
+If you have any questions or comments, you can email me at colinjohnsanders@gmail.com or message me on LinkedIn which is linked to the website.
 
 Enjoy!!
 
