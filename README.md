@@ -2,7 +2,7 @@
 
 This is my blog where I'll be sharing some of the projects I work on throughout the year. You can also find my Shiny App linked on the website. 
 
-It is still very much a work in progress, so bear with me if there are some hiccups along the way. 
+It is still very much a work in progress, so bare with me if there are some hiccups along the way. 
 
 If you have any questions or comments, you can email me at colinjohnsanders@gmail.com or message me on LinkedIn which is linked to the website.
 
