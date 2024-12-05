@@ -6,7 +6,7 @@ list_title: My blog posts
 ---
 
 
-If you're looking for something interactive, check out my Scouting Report dashboard with all of my scouting reports! [here](https://colin-sanders.shinyapps.io/shinydash/).
+If you're looking for something interactive, check out my Scouting Report dashboard with all of my scouting reports! [here](https://colin-sanders.shinyapps.io/shinydash).
 
 Do you have questions? feel free to reach me from my [contact page][contact].
 
