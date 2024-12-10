@@ -2,20 +2,34 @@
 permalink: /
 layout: home
 title: Welcome
-list_title: My blog posts
+list_title: My Blog Posts
 ---
 
+# Welcome to My Scouting and Analysis Hub
 
-If you're looking for something interactive, check out my Scouting Report dashboard with all of my scouting reports! [here](https://colin-sanders.shinyapps.io/shinydash).
+Discover insights, scouting reports, and interactive tools that bring player data to life. Whether you're here to explore my blog or dive into interactive dashboards, there's something for every baseball enthusiast.
 
-Do you have questions? feel free to reach out to me on [LinkedIn][LinkedIn].
+---
 
+## ???? **Explore My Work**
+If you're looking for something interactive, check out my **Scouting Report Dashboard** featuring all of my detailed scouting reports:  
+?????? [Visit the Dashboard](https://colin-sanders.shinyapps.io/shinydash)
 
-Have a great day!!
+---
 
-[gh-site]: https://pages.github.com/
-[minima]: https://github.com/jekyll/minima/tree/2.5-stable
-[jk]: https://jekyllrb.com/
-[gh]: https://help.github.com/en/github/working-with-github-pages
-[issue]: https://github.com/jsanz/gh-pages-minima-starter/issues/new/choose
-[LinkedIn]: https://www.linkedin.com/in/colin-sanders-14302521a/
+## ???? **Get in Touch**
+Have questions or feedback? I'd love to hear from you! Connect with me on [LinkedIn][LinkedIn].
+
+---
+
+### Latest Blog Posts
+[Dynamic list of posts will appear here]
+
+---
+
+### ???? **About Me**
+I'm passionate about baseball data analytics, scouting, and sharing insights through interactive tools. Explore my work and reach out to collaborate!
+
+---
+
+Have a great day!
