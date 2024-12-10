@@ -8,7 +8,7 @@ list_title: My blog posts
 
 If you're looking for something interactive, check out my Scouting Report dashboard with all of my scouting reports! [here](https://colin-sanders.shinyapps.io/shinydash).
 
-Do you have questions? feel free to reach me from my [contact page][contact].
+Do you have questions? feel free to reach out to me on [LinkedIn][LinkedIn].
 
 
 Have a great day!!
@@ -18,4 +18,4 @@ Have a great day!!
 [jk]: https://jekyllrb.com/
 [gh]: https://help.github.com/en/github/working-with-github-pages
 [issue]: https://github.com/jsanz/gh-pages-minima-starter/issues/new/choose
-[contact]: https://jorgesanz.net/contact/
+[LinkedIn]: https://www.linkedin.com/in/colin-sanders-14302521a/
