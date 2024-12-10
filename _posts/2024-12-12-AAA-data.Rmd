@@ -5,6 +5,5 @@ date: 2024-12-10
 categories: example
 ---
 
-Here is my Google Sheet:
 
 <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vR8NDQeARMPVeLWmcjln0i41ZLmPz6S4E1JmRuKzNNrNSx4d82IIF-kY5MpF_4lLT72ozGnG4xe8J-3/pubhtml?gid=1600156650&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
