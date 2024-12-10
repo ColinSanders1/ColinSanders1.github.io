@@ -1,7 +1,7 @@
 ---
 permalink: /
 layout: home
-title: Welcome to My Scouting and Analysis Hub
+title: Welcome
 list_title: My Blog Posts
 ---
 
@@ -16,18 +16,14 @@ If you're looking for something interactive, check out my **Scouting Report Dash
 ---
 
 ##  **Get in Touch**
-Have questions or feedback? I'd love to hear from you! Connect with me on [LinkedIn][LinkedIn].
+Have questions or feedback? I'd love to hear from you! Connect with me on LinkedIn!
 
 ---
 
 ### Latest Blog Posts
-[Dynamic list of posts will appear here]
 
 ---
 
-###  **About Me**
-I'm passionate about baseball data analytics, scouting, and sharing insights through interactive tools. Explore my work and reach out to collaborate!
-
----
 
 Have a great day!
+
