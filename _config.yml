@@ -33,3 +33,5 @@ exclude:
     - Gemfile.lock
     - LICENSE
     - README.md
+    
+encoding: "utf-8"
