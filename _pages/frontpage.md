@@ -9,24 +9,24 @@ Discover insights, scouting reports, and interactive tools that bring player dat
 
 ---
 
-## ??? Explore My Work
+## Explore My Work
 
 Check out some of my interactive tools and dashboards below. These apps are built to visualize player development, scout profiles, and performance trends in an intuitive way:
 
 <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem;">
 
   <a href="https://colin-sanders.shinyapps.io/shinydash" style="flex: 1 1 300px; padding: 1rem; background: #1f2937; color: white; border-radius: 10px; text-decoration: none;">
-    <strong>???? Scouting Report Dashboard</strong><br>
+    <strong Scouting Report Dashboard</strong><br>
     Dive into player evaluations and tool grades.
   </a>
 
   <a href="https://colin-sanders.shinyapps.io/shinyapp" style="flex: 1 1 300px; padding: 1rem; background: #1f2937; color: white; border-radius: 10px; text-decoration: none;">
-    <strong>???? Pitching Report App</strong><br>
+    <strong> Pitching Report App</strong><br>
     Explore pitch shapes, usage, and performance trends.
   </a>
 
   <a href="https://colin-sanders.shinyapps.io/stickandpuck" style="flex: 1 1 300px; padding: 1rem; background: #1f2937; color: white; border-radius: 10px; text-decoration: none;">
-    <strong>???? Hockey Game Recap</strong><br>
+    <strong> Hockey Game Recap</strong><br>
     Visualize game-by-game metrics and advanced stats.
   </a>
 
@@ -34,7 +34,7 @@ Check out some of my interactive tools and dashboards below. These apps are buil
 
 ---
 
-## ???? Get in Touch
+##  Get in Touch
 
 Have questions or feedback? I'd love to hear from you!
 
@@ -42,7 +42,7 @@ Have questions or feedback? I'd love to hear from you!
 
 ---
 
-## ???? Latest Blog Posts
+##  Latest Blog Posts
 
 ---
 
