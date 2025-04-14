@@ -1,7 +1,7 @@
 ---
 permalink: /
 layout: home
-title: Welcome
+title: 
 list_title: My Blog Posts
 ---
 
@@ -16,7 +16,7 @@ Check out some of my interactive tools and dashboards below. These apps are buil
 <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem;">
 
   <a href="https://colin-sanders.shinyapps.io/shinydash" style="flex: 1 1 300px; padding: 1rem; background: #1f2937; color: white; border-radius: 10px; text-decoration: none;">
-    <strong Scouting Report Dashboard</strong><br>
+    <strong> Scouting Report Dashboard</strong><br>
     Dive into player evaluations and tool grades.
   </a>
 
