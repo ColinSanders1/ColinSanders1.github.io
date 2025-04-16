@@ -20,7 +20,7 @@ Check out some of my interactive tools and dashboards below. These apps are buil
     Dive into player evaluations and tool grades.
   </a>
 
-  <a href="https://colin-sanders.shinyapps.io/shinyapp" style="flex: 1 1 300px; padding: 1rem; background: #1f2937; color: white; border-radius: 10px; text-decoration: none;">
+  <a href="https://colin-sanders.shinyapps.io/shiny_app" style="flex: 1 1 300px; padding: 1rem; background: #1f2937; color: white; border-radius: 10px; text-decoration: none;">
     <strong> Pitching Report App</strong><br>
     Explore pitch shapes, usage, and performance trends.
   </a>
